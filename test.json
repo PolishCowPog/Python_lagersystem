@@ -1,5 +1,21 @@
 [
-{"Product": "test", "Price": 100.0},
-{"Product": "test", "Price": 100.0},
-{"Product": "test", "Price": 100.0}
+{
+  "Product": "test",
+  "Price": 100.0
+}
+,
+{
+  "Product": "test2",
+  "Price": 200.0
+}
+,
+{
+  "Product": "test3",
+  "Price": 300.0
+}
+,
+{
+  "Product": "test4",
+  "Price": 400.0
+}
 ]
