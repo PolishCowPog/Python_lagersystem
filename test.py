@@ -1,6 +1,6 @@
 import json
 import os
-
+from colorama import Fore, Style
 
 # IMAGES ------------------------------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ def print_logo():
                    |__|                                                         |__|                  
 
     """
-    print(logo)
+    print(Fore.GREEN + logo + Fore.WHITE)
 
 def print_add_product():
     logo = """
@@ -28,7 +28,7 @@ def print_add_product():
                    |__|                                                                      |__|                  
 
     """
-    print(logo)
+    print(Fore.GREEN + logo + Fore.WHITE)
 
 
 # ADD PRODUCT ------------------------------------------------------------------------------------------------
@@ -43,6 +43,8 @@ def add_product_menu():
     print(f"Product Price: {product_price}")
     print(f"Product Category: {product_category}")
     print(f"Product Amount: {product_amount}")
+    print("")
+    print("----------------------")
     print("")
     print("Chanege values(1-4):")
     print("1. Product Name")
@@ -66,36 +68,57 @@ def add_product():
     add_product_menu()
 
     choice = input("Enter your choice (1-4 / 5-6): ")
-    
-
-
-    file_empty = True
-
-
-    data = {"Product": product_name, 
-            "Price": product_price,
-            "Category": product_category,
-            "Amount": product_amount}
-
-    if not os.path.exists('test.json') or os.path.getsize('test.json') == 0:
-        print("File is empty!")
+    if choice == "1":
+        global product_name
+        product_name = input("Enter product name: ")
+        add_product()
+    elif choice == "2":
+        global product_price
+        product_price = float(input("Enter product price: "))
+        add_product()
+    elif choice == "3":
+        global product_category
+        product_category = input("Enter product category: ")
+        add_product()
+    elif choice == "4":
+        global product_amount
+        product_amount = int(input("Enter product amount: "))
+        add_product()
+    elif choice == "5":
         file_empty = True
+    elif choice == "6":
+        main_menu()
     else:
-        print("File contains data!")
-        file_empty = False
+        add_product()
 
-    with open('test.json', 'rb+') as file:
-        if file_empty == False:
-            file.seek(-2, os.SEEK_END)
-            file.truncate()
 
-    with open('test.json', 'at') as file:
-        if file_empty == False:
-            file.write(",\n")
-        if file_empty == True:
-            file.write("[\n")
-        json.dump(data, file, indent=2)
-        file.write("\n]")
+        data = {"Product": product_name, 
+                "Price": product_price,
+                "Category": product_category,
+                "Amount": product_amount}
+
+        if not os.path.exists('test.json') or os.path.getsize('test.json') == 0:
+            print("File is empty!")
+            file_empty = True
+        else:
+            print("File contains data!")
+            file_empty = False
+
+        with open('test.json', 'rb+') as file:
+            if file_empty == False:
+                file.seek(-2, os.SEEK_END)
+                file.truncate()
+
+        with open('test.json', 'at') as file:
+            if file_empty == False:
+                file.write(",\n")
+            if file_empty == True:
+                file.write("[\n")
+            json.dump(data, file, indent=2)
+            file.write("\n]")
+        
+
+
 
 #remove()
 #write()
@@ -124,7 +147,7 @@ def main_menu():
 
     print_logo()
 
-    choice = input("Enter your choice (1-5): ")
+    choice = input("Enter your choice (1): ")
 
     if choice == "1":
         add_product()
@@ -135,5 +158,9 @@ def main_menu():
 
 
 # RUN PROGRAM --------------------------------------------------------------------------------------------
+from colorama import  Back, Style
+
 os.system('cls')
+print(Fore.WHITE)
+print(Style.BRIGHT)
 main_menu()

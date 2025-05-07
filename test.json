@@ -25,17 +25,5 @@
   "Price": 400.0,
   "Category": "TestKategori",
   "Amount": 100
-},
-{
-  "Product": "null",
-  "Price": 0.0,
-  "Category": "null",
-  "Amount": 0
-},
-{
-  "Product": "null",
-  "Price": 0.0,
-  "Category": "null",
-  "Amount": 0
 }
 ]
