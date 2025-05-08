@@ -213,6 +213,8 @@ def delete_product_menu():
     os.system('cls')
     print_delete_product()
     delete_product(input("Enter the name of the product you want to delete: "))
+    wait = input("Press enter to continue...")
+    main_menu()
 
 # MAIN MENU ------------------------------------------------------------------------------------------------
 def main_menu():
