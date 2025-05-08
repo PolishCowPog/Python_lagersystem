@@ -30,6 +30,34 @@ def print_add_product():
     """
     print(Fore.GREEN + logo + Fore.WHITE)
 
+def print_find_product():
+    logo = """
+
+                       ___   ______ _           _                         _            _  ___                      
+  ______ ______ ______|  _| |  ____(_)         | |                       | |          | ||_  |______ ______ ______ 
+ |______|______|______| |   | |__   _ _ __   __| |    _ __  _ __ ___   __| |_   _  ___| |_ | |______|______|______|
+  ______ ______ ______| |   |  __| | | '_ \ / _` |   | '_ \| '__/ _ \ / _` | | | |/ __| __|| |______ ______ ______ 
+ |______|______|______| |   | |    | | | | | (_| |   | |_) | | | (_) | (_| | |_| | (__| |_ | |______|______|______|
+                      | |_  |_|    |_|_| |_|\__,_|   | .__/|_|  \___/ \__,_|\__,_|\___|\__|| |                     
+                      |___|                          | |                                 |___|                     
+                                                     |_|                                                           
+
+    """
+    print(Fore.GREEN + logo + Fore.WHITE)
+
+def print_delete_product():
+    logo = """
+
+                       ___   _____       _      _         ___                      
+  ______ ______ ______|  _| |  __ \     | |    | |       |_  |______ ______ ______ 
+ |______|______|______| |   | |  | | ___| | ___| |_ ___    | |______|______|______|
+  ______ ______ ______| |   | |  | |/ _ \ |/ _ \ __/ _ \   | |______ ______ ______ 
+ |______|______|______| |   | |__| |  __/ |  __/ ||  __/   | |______|______|______|
+                      | |_  |_____/ \___|_|\___|\__\___|  _| |                     
+                      |___|                              |___|                     
+                                                                                   
+    """
+    print(Fore.GREEN + logo + Fore.WHITE)
 
 # ADD PRODUCT ------------------------------------------------------------------------------------------------
 product_name = "null"
@@ -39,6 +67,7 @@ product_amount = 0
 
 
 def add_product_menu():
+    print("The currect product will be added with the following values:")
     print(f"Product Name: {product_name}")
     print(f"Product Price: {product_price}")
     print(f"Product Category: {product_category}")
@@ -86,12 +115,6 @@ def add_product():
         add_product()
     elif choice == "5":
         file_empty = True
-    elif choice == "6":
-        main_menu()
-    else:
-        add_product()
-
-
         data = {"Product": product_name, 
                 "Price": product_price,
                 "Category": product_category,
@@ -116,6 +139,12 @@ def add_product():
                 file.write("[\n")
             json.dump(data, file, indent=2)
             file.write("\n]")
+    elif choice == "6":
+        main_menu()
+    else:
+        add_product()
+
+
         
 
 
@@ -133,24 +162,82 @@ def read_product(product_name):
                 return product
     return None
 
+def all_products():
+    os.system('cls')
+    with open('test.json', 'r') as file:
+        data = json.load(file)
+        for product in data:
+            print(f"Product: {product['Product']}   |    Price: {product['Price']}  |    Category: {product['Category']}    |    Amount: {product['Amount']}")
+
+def find_product():
+    os.system('cls')
+    print_find_product()
+    print("1. Search by product name")
+    print("2. Show all products")
+    print("3. Go back to main menu")
+
+    choice = input("(1-3): ")
+    if choice == "1":
+        search = input("Enter the name of the product you want to find: ")
+        product = read_product(search)
+        print(f"Found product: {product}")
+    elif choice == "2":
+        all_products()
+    elif choice == "3":
+        main_menu()
+    else:
+        find_product()
+
+    wait = input("Press enter to continue...")
+    main_menu()
+
+
+
+# DELETE PRODUCT --------------------------------------------------------------------------------------------
+def delete_product(product_name):
+    with open('test.json', 'r') as file:
+        data = json.load(file)
+    
+    # Filter out the product with matching name
+    updated_data = [product for product in data if product["Product"] != product_name]
+    
+    # Write the filtered data back to the file
+    with open('test.json', 'w') as file:
+        json.dump(updated_data, file, indent=2)
+        
+    print(f"Product '{product_name}' has been deleted.")
+
 # Example usage:
-product = read_product("test2")
-if product:
-    print(f"Found product: {product}")
-else:
-    print("Product not found")
 
-
+def delete_product_menu():
+    os.system('cls')
+    print_delete_product()
+    delete_product(input("Enter the name of the product you want to delete: "))
 
 # MAIN MENU ------------------------------------------------------------------------------------------------
 def main_menu():
 
-    print_logo()
+    os.system('cls')
 
-    choice = input("Enter your choice (1): ")
+    print_logo()
+    print("1. Add product")
+    print("2. Find product")
+    print("3. Delete product")
+    print("")
+    print("4. Exit")
+    print("")
+
+    choice = input("Enter your choice (1-3) (4): ")
 
     if choice == "1":
         add_product()
+    elif choice == "2":
+        find_product()
+    elif choice == "3":
+        delete_product_menu()
+    elif choice == "4":
+        print("Exiting...")
+        exit()
     else:
         os.system('cls')
         main_menu()
@@ -158,9 +245,6 @@ def main_menu():
 
 
 # RUN PROGRAM --------------------------------------------------------------------------------------------
-from colorama import  Back, Style
-
-os.system('cls')
 print(Fore.WHITE)
 print(Style.BRIGHT)
 main_menu()

@@ -1,29 +1,20 @@
 [
-{
-  "Product": "test",
-  "Price": 100.0,
-  "Category": "Electronics",
-  "Amount": 10
-}
-,
-{
-  "Product": "test2",
-  "Price": 200.0,
-  "Category": "Office",
-  "Amount": 70
-}
-,
-{
-  "Product": "test3",
-  "Price": 300.0,
-  "Category": "Clothes",
-  "Amount": 20
-}
-,
-{
-  "Product": "test4",
-  "Price": 400.0,
-  "Category": "TestKategori",
-  "Amount": 100
-}
+  {
+    "Product": "test3",
+    "Price": 300.0,
+    "Category": "Clothes",
+    "Amount": 20
+  },
+  {
+    "Product": "test4",
+    "Price": 400.0,
+    "Category": "TestKategori",
+    "Amount": 100
+  },
+  {
+    "Product": "BMW",
+    "Price": 9000.0,
+    "Category": "Car",
+    "Amount": 3
+  }
 ]
